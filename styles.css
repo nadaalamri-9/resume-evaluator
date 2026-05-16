@@ -1,0 +1,104 @@
+:root {
+  --primary: #4f46e5;
+  --page-background: #f5f7fa;
+  --card-background: #ffffff;
+  --text: #1a1a2e;
+  --primary-dark: #3730a3;
+  --header: #0d0d37;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Georgia;
+  background: var(--page-background);
+  color: var(--text);
+}
+
+header {
+  background: var(--header);
+  color: white;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+nav {     
+  display: flex;
+  gap: 16px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));  /* Responsive grid  auto fit so it fits the available space*/
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+  
+}
+
+section,
+div {
+  background: var(--card-background);
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+textarea,
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus,
+input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+
+
+button {
+  background: var(--primary);
+  color: white;
+  border: var(--primary);
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+
+@media (max-width: 700px){
+    main{
+      grid-template-columns: 1fr;
+    }   
+}
