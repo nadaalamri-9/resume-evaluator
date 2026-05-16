@@ -79,21 +79,44 @@ input:focus {
 
 
 button {
-  background: var(--primary);
-  color: white;
-  border: var(--primary);
-  padding: 12px;
-  border-radius: 6px;
+  width: 100%;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #ffffff;
   font-size: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
 button:hover {
-  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(79, 70, 229, 0.36);
+  background: linear-gradient(135deg, #4338ca, #6d28d9);
 }
 
 button:active {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.25);
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(124, 58, 237, 0.28);
+  outline-offset: 3px;
+}
+
+button:disabled,
+button[disabled],
+button.loading {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
+  box-shadow: none;
+  background: linear-gradient(135deg, #9ca3af, #6b7280);
 }
 
 
