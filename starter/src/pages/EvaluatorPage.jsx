@@ -7,23 +7,33 @@
 //             add conditional rendering to the results area
 // TODO Day 5: move all state and logic to src/hooks/useEvaluator.js
 //             import and use the hook here instead
+import { useState } from 'react'
 
 export default function EvaluatorPage() {
+
+  const [jobDescription, setJobDescription] = useState('')
+  const [prompt, setPrompt] = useState('')
+  const [file, setFile] = useState(null)
+  const [status, setStatus] = useState('idle') 
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    if (!jobDescription) { setStatus('error'); return }
+    if (!file) { setStatus('error'); return }
+    setStatus('loading')
+  }
+
   return (
     <main>
       <section className="form-section">
         <h2>Evaluate a Resume</h2>
-        <form id="Resume-Form" method="post">
-
-            <label htmlFor="username">Your Name:</label>
-            <br /><br />
-            <input type="text" id="username" name="username" placeholder="Enter your name"/>
-
-            <br /><br />
+        <form onSubmit={handleSubmit}>
 
             <label htmlFor="job-description">Job Description:</label>
             <br /><br />
             <textarea id="job-description" name="job-description"
+            value={jobDescription}
+            onChange={(e) => setJobDescription(e.target.value)}
             placeholder="Enter the job description here..."
             rows="6"></textarea>
 
@@ -32,6 +42,8 @@ export default function EvaluatorPage() {
             <label htmlFor="custom-prompt">Custom Prompt:</label>
             <br /><br />
             <textarea id="custom-prompt" name="custom-prompt"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
             placeholder="Enter your custom prompt here..."
             rows="4"></textarea>
 
@@ -39,8 +51,12 @@ export default function EvaluatorPage() {
 
             <label htmlFor="resume-file">Upload Your Resume:</label>
             <br /><br />
-            <input type="file" id="resume-file" name="resume-file" accept=".pdf"/>
-
+            <input
+              type="file"
+              id="resume-file"
+              accept=".pdf"
+              onChange={(e) => setFile(e.target.files[0] || null)}
+            />
             <br /><br />
 
             <button type="submit">Evaluate Resume</button>
@@ -51,7 +67,9 @@ export default function EvaluatorPage() {
       <section className="results-section">
         <h2>Results</h2>
         <div id="results">
-          <div id="results">Results will appear here...</div>
+          {status === 'idle' && <p>Results will appear here</p>}
+          {status === 'error' && <p>Please fill in all fields and upload a resume.</p>}
+          {status === 'loading' && <p>Evaluating...</p>}
         </div>
       </section>
     </main>
