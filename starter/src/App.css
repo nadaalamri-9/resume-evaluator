@@ -25,7 +25,11 @@
   .vite {
     inset-inline: 0;
     margin: 0 auto;
+
+    
   }
+
+  
 
   .base {
     width: 170px;
@@ -181,4 +185,11 @@
     right: 0;
     border-right-color: var(--border);
   }
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 0 24px;
 }

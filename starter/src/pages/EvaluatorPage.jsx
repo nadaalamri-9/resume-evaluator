@@ -15,12 +15,29 @@ export default function EvaluatorPage() {
   const [prompt, setPrompt] = useState('')
   const [file, setFile] = useState(null)
   const [status, setStatus] = useState('idle') 
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [result, setResult] = useState(null)
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!jobDescription) { setStatus('error'); return }
-    if (!file) { setStatus('error'); return }
+    if (!jobDescription) 
+      { setStatus('error')
+        setErrorMessage('Please enter a job description.')
+       return
+      }
+      
+    if (!file) 
+      { setStatus('error')
+        setErrorMessage('Please upload your resume.') 
+        return 
+      }
+
     setStatus('loading')
+
+    setTimeout(() => {
+      setStatus('success')
+      setResult(`Evaluating ${file.name}... ChatGPT integration coming in Stage 5.`)}, 1500)
+
   }
 
   return (
@@ -59,7 +76,7 @@ export default function EvaluatorPage() {
             />
             <br /><br />
 
-            <button type="submit">Evaluate Resume</button>
+            <button type="submit" disabled={status === 'loading'}>Evaluate Resume</button>
 
           </form>
       </section>
@@ -67,9 +84,10 @@ export default function EvaluatorPage() {
       <section className="results-section">
         <h2>Results</h2>
         <div id="results">
-          {status === 'idle' && <p>Results will appear here</p>}
-          {status === 'error' && <p>Please fill in all fields and upload a resume.</p>}
+          {status === 'idle' && <p>Fill in the form.</p>}
           {status === 'loading' && <p>Evaluating...</p>}
+          {status === 'error' && <p style={{color: 'red'}}>{errorMessage}</p>}
+          {status === 'success' && <p>{result}</p>}
         </div>
       </section>
     </main>

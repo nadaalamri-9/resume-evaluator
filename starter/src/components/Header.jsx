@@ -3,7 +3,7 @@
 
 export default function Header() {
   return (
-    <header>
+    <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 24px" }}>
 
       <h1>Resume Evaluator</h1>
       <nav>
