@@ -1,65 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="Ricon.jpg">
+    <link rel="icon" type="image/x-icon" href="Ricon.jpg" />
     <title>Resume Evaluator</title>
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-
     <header>
-
       <h1>Resume Evaluator</h1>
 
       <nav>
         <a href="#">Login</a>
         <a href="#">Register</a>
       </nav>
-
     </header>
 
     <main>
-        <section>
-
-          <form id="Resume-Form" method="post">
-
-
-            <label for="job-description">Job Description:</label>
-            <br><br>
-            <textarea id="job-description" name="job-description"
+      <section>
+        <form id="Resume-Form" method="post">
+          <label for="job-description">Job Description:</label>
+          <br /><br />
+          <textarea
+            id="job-description"
+            name="job-description"
             placeholder="Enter the job description here..."
-            rows="6"></textarea>
+            rows="6"
+          ></textarea>
 
-            <br><br>
+          <br /><br />
 
-            <label for="custom-prompt">Custom Prompt:</label>
-            <br><br>
-            <textarea id="custom-prompt" name="custom-prompt"
+          <label for="custom-prompt">Custom Prompt:</label>
+          <br /><br />
+          <textarea
+            id="custom-prompt"
+            name="custom-prompt"
             placeholder="Enter your custom prompt here..."
-            rows="4"></textarea>
+            rows="4"
+          ></textarea>
 
-            <br><br>
+          <br /><br />
 
-            <label for="resume-file">Upload Your Resume:</label>
-            <br><br>
-            <input type="file" id="resume-file" name="resume-file" accept=".pdf"/>
+          <label for="resume-file">Upload Your Resume:</label>
+          <br /><br />
+          <input
+            type="file"
+            id="resume-file"
+            name="resume-file"
+            accept=".pdf"
+          />
 
-            <br><br>
+          <br /><br />
 
-            <button type="submit">Evaluate Resume</button>
+          <button type="submit">Evaluate Resume</button>
+        </form>
+      </section>
 
-          </form>
-            
-        </section>
-        
-        <div id="results">Results will appear here...</div>
-
+      <div id="results">Results will appear here...</div>
     </main>
 
-      <script src="script.js"></script>
-      
+    <script src="script.js"></script>
   </body>
-
 </html>

@@ -28,12 +28,6 @@ header {
   align-items: center;
 }
 
-
-nav {     
-  display: flex;
-  gap: 16px;
-}
-
 nav a {
   color: white;
   text-decoration: none;
