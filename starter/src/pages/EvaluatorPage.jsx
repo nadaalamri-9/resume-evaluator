@@ -7,38 +7,11 @@
 //             add conditional rendering to the results area
 // TODO Day 5: move all state and logic to src/hooks/useEvaluator.js
 //             import and use the hook here instead
-import { useState } from 'react'
+import useEvaluator from '../hooks/useEvaluator'
 
 export default function EvaluatorPage() {
 
-  const [jobDescription, setJobDescription] = useState('')
-  const [prompt, setPrompt] = useState('')
-  const [file, setFile] = useState(null)
-  const [status, setStatus] = useState('idle') 
-  const [errorMessage, setErrorMessage] = useState(null)
-  const [result, setResult] = useState(null)
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    if (!jobDescription) 
-      { setStatus('error')
-        setErrorMessage('Please enter a job description.')
-       return
-      }
-      
-    if (!file) 
-      { setStatus('error')
-        setErrorMessage('Please upload your resume.') 
-        return 
-      }
-
-    setStatus('loading')
-
-    setTimeout(() => {
-      setStatus('success')
-      setResult(`Evaluating ${file.name}... ChatGPT integration coming in Stage 5.`)}, 1500)
-
-  }
+  const { jobDescription, setJobDescription, prompt, setPrompt, setFile, status, errorMessage, result, handleSubmit } = useEvaluator()
 
   return (
     <main>

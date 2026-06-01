@@ -1,14 +1,40 @@
-// TODO Day 4: build a login form with controlled email and password inputs
-//             add a submit handler that console.logs the values for now
-//             add a link to the Register page
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(email, password);
+  }
+
   return (
     <main className="auth-page">
       <div className="auth-card">
         <h2>Login</h2>
-        {/* Build your login form here */}
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </main>
-  )
+  );
 }
