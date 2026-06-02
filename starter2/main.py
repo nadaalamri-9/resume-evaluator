@@ -6,8 +6,6 @@ from fastapi import FastAPI
 app = FastAPI(title="Resume Evaluator API")
 
 
-
-
 # TODO Day 5: add CORS middleware here
 # app.add_middleware(
 #     CORSMiddleware,
@@ -32,11 +30,4 @@ def root():
 # GET /ping  →  { "status": "ok" }
 # GET /hello/{name}  →  { "message": "Hello, {name}!" }
 
-@app.get("/ping")
-def ping():
-    return {"status": "ok"}
 
-
-@app.get("/hello/{name}")
-def hello(name: str):
-    return {"message": f"Hello, {name}!"}
