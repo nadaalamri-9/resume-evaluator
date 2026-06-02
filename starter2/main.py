@@ -6,6 +6,8 @@ from fastapi import FastAPI
 app = FastAPI(title="Resume Evaluator API")
 
 
+
+
 # TODO Day 5: add CORS middleware here
 # app.add_middleware(
 #     CORSMiddleware,
