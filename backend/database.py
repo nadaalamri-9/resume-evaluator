@@ -1,3 +1,4 @@
+from models import User
 from sqlmodel import SQLModel, create_engine, Session
 
 DATABASE_URL = "sqlite:///./resume_evaluator.db"
