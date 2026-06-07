@@ -4,7 +4,6 @@ const form = document.getElementById("Resume-Form");
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const username = document.getElementById("username").value;
     const jobDescription = document.getElementById("job-description").value;
     const customPrompt = document.getElementById("custom-prompt").value;
     const fileInput = document.getElementById("resume-file");

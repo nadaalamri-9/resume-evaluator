@@ -34,8 +34,7 @@ export default function useEvaluator() {
         setTimeout(() => {
             setStatus("success");
             setResult(
-                `Evaluating ${file.name}... ChatGPT integration coming in Stage 5.`,
-            );
+                `Evaluating ${file.name}... ChatGPT integration coming in Stage 5.`);
         }, 1500);
     }
 
