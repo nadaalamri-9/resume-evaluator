@@ -1,11 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers import auth, evaluate
+from database import create_db
 
 # TODO Day 5: import CORSMiddleware and configure it
 # TODO Day 2: import and include auth and evaluate routers
 
 app = FastAPI(title="Resume Evaluator API")
+
+@app.on_event("startup")
+def on_startup():
+    create_db()
 
 
 # TODO Day 5: add CORS middleware here
