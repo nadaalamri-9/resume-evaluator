@@ -5,6 +5,10 @@ from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 
+from sqlmodel import Session, select
+from database import get_session
+from models import User
+
 SECRET_KEY = "dev-secret-key-change-in-production"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
@@ -47,3 +51,17 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> str:
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     return email
+
+def require_admin(
+    current_user_email: str = Depends(get_current_user),
+    session: Session = Depends(get_session),
+):
+    user = session.exec(
+        select(User).where(User.email == current_user_email)
+    ).first()
+    if not user or user.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required",
+        )
+    return user

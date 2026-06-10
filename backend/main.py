@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth, evaluate
+from routers import auth, evaluate, admin
 from database import create_db
 
 # TODO Day 5: import CORSMiddleware and configure it
@@ -29,6 +29,8 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 
 app.include_router(evaluate.router, prefix="/evaluate", tags=["evaluate"])
+
+app.include_router(admin.router, prefix="/admin", tags=["admin"])
 
 @app.get("/")
 def root():
