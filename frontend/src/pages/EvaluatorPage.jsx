@@ -30,8 +30,6 @@ export default function EvaluatorPage() {
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="job-description">Job Description:</label>
-          <br />
-          <br />
 
           <textarea
             id="job-description"
@@ -42,12 +40,7 @@ export default function EvaluatorPage() {
             rows="6"
           ></textarea>
 
-          <br />
-          <br />
-
           <label htmlFor="custom-prompt">Custom Prompt:</label>
-          <br />
-          <br />
 
           <textarea
             id="custom-prompt"
@@ -58,12 +51,7 @@ export default function EvaluatorPage() {
             rows="4"
           ></textarea>
 
-          <br />
-          <br />
-
           <label htmlFor="resume-file">Upload Your Resume:</label>
-          <br />
-          <br />
 
           <input
             type="file"
@@ -71,9 +59,6 @@ export default function EvaluatorPage() {
             accept=".pdf"
             onChange={(e) => setFile(e.target.files[0] || null)}
           />
-
-          <br />
-          <br />
 
           <button type="submit" disabled={status === "loading"}>
             Evaluate Resume
@@ -85,12 +70,37 @@ export default function EvaluatorPage() {
         <h2>Results</h2>
 
         <div id="results">
-          {status === "idle" && <p>Fill in the form.</p>}
-          {status === "loading" && <p>Evaluating...</p>}
-          {status === "error" && (
-            <p style={{ color: "red" }}>{errorMessage}</p>
+          {status === "idle" && (
+            <div className="empty-state">
+              <strong>No evaluation yet</strong>
+              <p>
+                Add a job description, upload a PDF resume, then start the
+                evaluation.
+              </p>
+            </div>
           )}
-          {status === "success" && <p>{result}</p>}
+
+          {status === "loading" && (
+            <div className="loading-state">
+              <strong>Evaluating...</strong>
+              <p>We are analyzing the resume against the job description.</p>
+            </div>
+          )}
+
+          {status === "error" && (
+            <div className="error-state">
+              <strong>Error</strong>
+              <p>{errorMessage}</p>
+            </div>
+          )}
+
+          {status === "success" && (
+            <div className="result-card">
+              {result.split("\n").map((line, index) => (
+                <p key={index}>{line.replace(/\*\*/g, "")}</p>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </main>
