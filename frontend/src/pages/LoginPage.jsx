@@ -17,7 +17,15 @@ export default function LoginPage() {
     setError(null);
     try {
       const response = await client.post("/auth/login", { email, password });
-      login(email, response.data.access_token);
+      const token = response.data.access_token;
+
+      // store the token first so the interceptor can attach it to /me
+      localStorage.setItem("token", token);
+
+      // ask the backend who we are (returns email + role)
+      const me = await client.get("/auth/me");
+
+      login(email, token, me.data.role);
       navigate("/");
     } catch (err) {
       setError("Invalid email or password.");

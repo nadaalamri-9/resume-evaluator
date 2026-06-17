@@ -35,19 +35,39 @@ header h1 {
 nav {
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
-nav a {
+/* shared look for links, the logout button, and the email text */
+nav a,
+nav button,
+nav span {
   color: rgba(255, 255, 255, 0.75);
-  text-decoration: none;
   font-size: 0.9rem;
   padding: 8px 16px;
   border-radius: 8px;
-  transition: all 0.2s;
   border: 1px solid transparent;
+  transition: all 0.2s;
 }
 
-nav a:hover {
+nav a {
+  text-decoration: none;
+}
+
+/* button-only resets so it matches the links */
+nav button {
+  background-color: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+nav span {
+  color: #ffffff;
+}
+
+/* hover only for the clickable items (not the email) */
+nav a:hover,
+nav button:hover {
   color: #ffffff;
   background-color: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.2);

@@ -16,6 +16,8 @@ import RegisterPage from "./pages/RegisterPage";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 
+import AdminPage from "./pages/AdminPage";
+
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
@@ -43,6 +45,14 @@ function App() {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<p>Page not found</p>} />
       </Routes>
     </>

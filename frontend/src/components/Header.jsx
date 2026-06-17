@@ -17,6 +17,7 @@ export default function Header() {
         {user ? (
           <>
             <span>{user.email}</span>
+            {user.role === "admin" && <Link to="/admin">Admin</Link>}
             <button onClick={handleLogout}>Logout</button>
           </>
         ) : (
