@@ -1,4 +1,5 @@
 import { useState } from "react";
+import client from "../api/client";
 
 export default function useEvaluator() {
     const [jobDescription, setJobDescription] = useState("");
@@ -8,7 +9,7 @@ export default function useEvaluator() {
     const [errorMessage, setErrorMessage] = useState(null);
     const [result, setResult] = useState(null);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
 
         if (!jobDescription && !file) {
@@ -31,11 +32,17 @@ export default function useEvaluator() {
 
         setStatus("loading");
 
-        setTimeout(() => {
+        try {
+            const response = await client.post("/evaluate/", {
+                job_description: jobDescription,
+                prompt,
+            });
             setStatus("success");
-            setResult(
-                `Evaluating ${file.name}... ChatGPT integration coming in Stage 5.`);
-        }, 1500);
+            setResult(response.data.result);
+        } catch (err) {
+            setStatus("error");
+            setErrorMessage("Evaluation failed. Please try again.");
+        }
     }
 
     return {

@@ -1,14 +1,35 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import client from "../api/client";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password, confirmPassword);
+    setError(null);
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      await client.post("/auth/register", { email, password });
+      const response = await client.post("/auth/login", { email, password });
+      login(email, response.data.access_token);
+      navigate("/");
+    } catch (err) {
+      setError("Registration failed. The email may already be registered.");
+    }
   }
 
   return (
@@ -42,6 +63,9 @@ export default function RegisterPage() {
 
           <button type="submit">Register</button>
         </form>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
         <p><Link to="/login">Login</Link></p>
       </div>
     </main>

@@ -1,13 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import client from "../api/client";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(email, password);
+    setError(null);
+    try {
+      const response = await client.post("/auth/login", { email, password });
+      login(email, response.data.access_token);
+      navigate("/");
+    } catch (err) {
+      setError("Invalid email or password.");
+    }
   }
 
   return (
@@ -33,6 +47,9 @@ export default function LoginPage() {
 
           <button type="submit">Login</button>
         </form>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
         <p>Don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </main>
