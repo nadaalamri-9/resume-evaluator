@@ -24,11 +24,21 @@ export default function RegisterPage() {
 
     try {
       await client.post("/auth/register", { email, password });
+
       const response = await client.post("/auth/login", { email, password });
-      login(email, response.data.access_token);
+      const token = response.data.access_token;
+
+      localStorage.setItem("token", token);
+
+      const me = await client.get("/auth/me");
+
+      login(email, token, me.data.role);
       navigate("/");
-    } catch (err) {
-      setError("Registration failed. The email may already be registered.");
+    } 
+    catch (err) {
+    setError(
+      err.response?.data?.detail || "Registration failed. Please try again."
+    );
     }
   }
 
@@ -65,8 +75,8 @@ export default function RegisterPage() {
         </form>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-
-        <p><Link to="/login">Login</Link></p>
+        
+        <p>Already have an account?<Link to="/login">Login</Link></p>
       </div>
     </main>
   );

@@ -11,19 +11,35 @@ export default function Header() {
   }
 
   return (
-    <header>
-      <h1>Resume Evaluator</h1>
-      <nav>
+    <header className="app-header">
+      <div className="brand">
+        <h1>Resume Evaluator</h1>
+      </div>
+
+      <nav className="nav-actions">
         {user ? (
           <>
-            <span>{user.email}</span>
-            {user.role === "admin" && <Link to="/admin">Admin</Link>}
-            <button onClick={handleLogout}>Logout</button>
+            <span className="user-pill">{user.email}</span>
+
+            {user.role === "admin" && (
+              <Link className="nav-link" to="/admin">
+                Admin
+              </Link>
+            )}
+
+            <button className="nav-button" onClick={handleLogout}>
+              Logout
+            </button>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link className="nav-link" to="/login">
+              Login
+            </Link>
+
+            <Link className="nav-link" to="/register">
+              Register
+            </Link>
           </>
         )}
       </nav>

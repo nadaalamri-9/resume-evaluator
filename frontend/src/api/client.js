@@ -1,16 +1,17 @@
-import axios from 'axios'
+import axios from "axios";
 
 const client = axios.create({
-  baseURL: 'http://localhost:8000',
-})
+  baseURL: "http://localhost:5000",
+});
 
-// Interceptors run before every request — attach the token if it exists
 client.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
-  }
-  return config
-})
+  const token = localStorage.getItem("token");
 
-export default client
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
+export default client;

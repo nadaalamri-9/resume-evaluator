@@ -57,9 +57,10 @@ export default function LoginPage() {
         </form>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-
+        
         <p>Don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </main>
   );
 }
+
